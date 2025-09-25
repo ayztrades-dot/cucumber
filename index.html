@@ -1,3 +1,5 @@
+
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -116,6 +118,49 @@
   </style>
 </head>
 <body>
+
+<!-- PIN Section -->
+<div id="pinSection" style="margin-top:40px; padding:20px; background:#fff; border:2px solid #444; border-radius:12px; max-width:400px; margin-left:auto; margin-right:auto; box-shadow:0 4px 10px rgba(0,0,0,0.1);">
+  <h2 style="margin-bottom:12px; font-size:1.2rem; color:#111;">Enter PIN to Access Generator</h2>
+  <input id="pinInput" type="password" placeholder="Enter PIN" maxlength="6" style="width:100%; padding:12px; font-size:16px; border:2px solid #444; border-radius:8px; margin-bottom:12px;">
+  <button id="pinSubmit" style="padding:10px 20px; border:2px solid #000; border-radius:8px; background:#78BE20; color:#000; font-weight:bold; cursor:pointer;">Unlock</button>
+  <div id="pinMessage" style="margin-top:10px; font-weight:bold;"></div>
+</div>
+
+<!-- Generator container -->
+<div id="generatorContainer" style="display:none;">
+  <!-- Place your entire generator HTML here -->
+</div>
+
+<script>
+  const pinSubmit = document.getElementById("pinSubmit");
+  const pinInput = document.getElementById("pinInput");
+  const pinMessage = document.getElementById("pinMessage");
+  const generatorContainer = document.getElementById("generatorContainer");
+
+  // Fetch valid pins from pin.json
+  let validPins = [];
+  fetch('pin.json')
+    .then(res => res.json())
+    .then(data => { validPins = data.validPins; })
+    .catch(err => { console.error("Failed to load pins:", err); });
+
+  pinSubmit.addEventListener("click", () => {
+    const enteredPin = pinInput.value.trim();
+    if (validPins.includes(enteredPin)) {
+      pinMessage.style.color = "green";
+      pinMessage.textContent = "Correct PIN! Access granted.";
+      pinSection.style.display = "none";        // hide PIN section
+      generatorContainer.style.display = "block"; // show generator
+    } else {
+      pinMessage.style.color = "red";
+      pinMessage.textContent = "Incorrect PIN. Try again.";
+    }
+  });
+</script>
+
+  
+  
   <header>
     <img src="Asda-Logo.png" 
          alt="ASDA Logo" 
