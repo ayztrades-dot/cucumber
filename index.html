@@ -130,37 +130,6 @@
 <!-- Generator container -->
 <div id="generatorContainer" style="display:none;">
   <!-- Place your entire generator HTML here -->
-</div>
-
-<script>
-  const pinSubmit = document.getElementById("pinSubmit");
-  const pinInput = document.getElementById("pinInput");
-  const pinMessage = document.getElementById("pinMessage");
-  const generatorContainer = document.getElementById("generatorContainer");
-
-  // Fetch valid pins from pin.json
-  let validPins = [];
-  fetch('pin.json')
-    .then(res => res.json())
-    .then(data => { validPins = data.validPins; })
-    .catch(err => { console.error("Failed to load pins:", err); });
-
-  pinSubmit.addEventListener("click", () => {
-    const enteredPin = pinInput.value.trim();
-    if (validPins.includes(enteredPin)) {
-      pinMessage.style.color = "green";
-      pinMessage.textContent = "Correct PIN! Access granted.";
-      pinSection.style.display = "none";        // hide PIN section
-      generatorContainer.style.display = "block"; // show generator
-    } else {
-      pinMessage.style.color = "red";
-      pinMessage.textContent = "Incorrect PIN. Try again.";
-    }
-  });
-</script>
-
-  
-  
   <header>
     <img src="Asda-Logo.png" 
          alt="ASDA Logo" 
@@ -274,3 +243,36 @@
   </script>
 </body>
 </html>
+
+</div>
+
+<script>
+  const pinSubmit = document.getElementById("pinSubmit");
+  const pinInput = document.getElementById("pinInput");
+  const pinMessage = document.getElementById("pinMessage");
+  const generatorContainer = document.getElementById("generatorContainer");
+
+  // Fetch valid pins from pin.json
+  let validPins = [];
+  fetch('pin.json')
+    .then(res => res.json())
+    .then(data => { validPins = data.validPins; })
+    .catch(err => { console.error("Failed to load pins:", err); });
+
+  pinSubmit.addEventListener("click", () => {
+    const enteredPin = pinInput.value.trim();
+    if (validPins.includes(enteredPin)) {
+      pinMessage.style.color = "green";
+      pinMessage.textContent = "Correct PIN! Access granted.";
+      pinSection.style.display = "none";        // hide PIN section
+      generatorContainer.style.display = "block"; // show generator
+    } else {
+      pinMessage.style.color = "red";
+      pinMessage.textContent = "Incorrect PIN. Try again.";
+    }
+  });
+</script>
+
+  
+  
+  
